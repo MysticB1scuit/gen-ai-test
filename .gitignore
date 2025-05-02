@@ -1,13 +1,16 @@
 # Node
 node_modules/
+.expo/
 
 # Python
 __pycache__/
 *.pyc
 venv310/
 
-# Generated media
+# Output
 static/generated/
+static/output/
+static/sample/
 
 # OS files
 .DS_Store
