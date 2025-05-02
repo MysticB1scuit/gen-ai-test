@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Text-to-Image & Video Generator</title>
+</head>
+<body>
+	<h1>AI Media Generator</h1>
+	
+	<form id="image-form" method="POST" action="/generate-image">
+		<label>Enter text for image:</label><br>
+		<input type="text" name="text" required>
+		<button type="submit">Generate Image</button>
+	</form>
+
+	<br>
+
+	
+	<form id="video-form" method="POST" action="/generate-video">
+		<label>Enter text for video:</label><br>
+		<input type="text" name="text" required>
+		<button type="submit">Generate Video</button>
+	</form>
+
+	<hr>
+	
+	<div id="media-output">
+		<h3>Generated Media:</h3>
+		<img id="generated-image" src="" alt="" style="max-width: 400px;"><br>
+		<video id="generated-video" controls width="400">
+			<source id="video-source" src="" type="video/mp4">
+		</video>
+	</div>
+
+	<script>
+		const imageForm = document.getElementById('image-form');
+		const videoForm = document.getElementById('video-form');
+
+		imageForm.onsubmit = async (e) => {
+			e.preventDefault();
+			const text = imageForm.text.value;
+			const response = await fetch('/generate-image', {
+				method: 'POST',
+				headers: { 'Content-Type': 'application/json' },
+				body: JSON.stringify({ text })
+			});
+			const data = await response.json();
+			document.getElementById('generated-image').src = data.image_url;
+		};
+		
+		videoForm.onsubmit = async (e) => {
+			e.preventDefault();
+			const text = videoForm.text.value;
+			const response = await fetch('/generate-video', {
+				method: 'POST',
+				headers: { 'Content-Type': 'application/json' },
+				body: JSON.stringify({ text })
+			});
+			const data = await response.json();
+			document.getElementById('video-source').src = data.video_url + '?t=' + new Date().getTime();
+			document.getElementById('generated-video').load();
+		};
+	</script>
+</body>
+</html>

@@ -1,0 +1,17 @@
+# Node
+node_modules/
+
+# Python
+__pycache__/
+*.pyc
+venv310/
+
+# Generated media
+static/generated/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Datasets
+data/
