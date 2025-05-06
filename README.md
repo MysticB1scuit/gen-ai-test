@@ -86,4 +86,17 @@ Project_Directory/
 
 ---
 
+## Version Compatibility
+
+This app was tested locally with:
+
+- torch==2.1.0+cu121
+- torchvision==0.16.0+cu121
+- torchaudio==2.1.0+cu121
+- diffusers==0.29.0
+- modelscope==1.9.5
+
+These versions ensured compatibility with GPU acceleration and pretrained models.
+
+If you intend to use ModelScope or Stable Diffusion locally with GPU, then refer to `reuirements.txt` for guidance but adjust versions as needed.
 
