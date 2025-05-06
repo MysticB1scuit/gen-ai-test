@@ -98,5 +98,5 @@ This app was tested locally with:
 
 These versions ensured compatibility with GPU acceleration and pretrained models.
 
-If you intend to use ModelScope or Stable Diffusion locally with GPU, then refer to `reuirements.txt` for guidance but adjust versions as needed.
+If you intend to use ModelScope or Stable Diffusion locally with GPU, then refer to `requirements.txt` for guidance but adjust versions as needed.
 
