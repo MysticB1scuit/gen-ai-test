@@ -31,7 +31,7 @@ export default function App() {
     setErrorMsg(null);
 
     try {
-      const response = await fetch('${SERVER_URL}/generate', {
+      const response = await fetch(`${SERVER_URL}/generate`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ prompt }),
