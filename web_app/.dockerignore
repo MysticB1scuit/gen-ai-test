@@ -1,0 +1,10 @@
+venv310/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+.env
+static/generated/
+static/sample/
+data/

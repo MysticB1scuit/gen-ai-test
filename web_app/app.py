@@ -1,12 +1,18 @@
 from flask import Flask, render_template, request, jsonify
 from models.load_stable_diffusion import load_sd_model
 from datetime import datetime
+from s3_uploader import upload_to_s3
+from aws_xray_sdk.core import xray_recorder
+from aws_xray_sdk.ext.flask.middleware import XRayMiddleware
 import os
 import torch
 import gc
 
 app = Flask(__name__)
 pipe = load_sd_model()
+
+xray_recorder.configure(service='genai-flask-app')
+XRayMiddleware(app, xray_recorder)
 
 keyword_to_video = {
 	"animal": "animal_type.mp4",
@@ -53,6 +59,9 @@ def generate_image():
 	timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
 	filename = f"generated_{timestamp}.png"
 	output_path = os.path.join('static', 'generated', filename)
+
+	os.makedirs(os.path.dirname(output_path), exist_ok=True)
+
 	image.save(output_path)
 
 	return jsonify({'image_url': f'/static/generated/{filename}'})
@@ -116,6 +125,7 @@ def generate():
 		output_path = os.path.join('static', 'generated', filename)
 		with open(selected_video, "rb") as src, open(output_path, "wb") as dst:
 			dst.write(src.read())
+		upload_to_s3(output_path)
 		print(f"[INFO] Sending Matched Video: {output_path}")
 		base_url = request.host_url.rstrip('/')
 		return jsonify({'video_url': f'{base_url}/static/generated/{filename}'})
@@ -125,6 +135,7 @@ def generate():
 		filename = f"generated_{datetime.now().strftime('%Y%m%d_%H%M%S')}.png"
 		output_path = os.path.join('static', 'generated', filename)
 		image.save(output_path)
+		upload_to_s3(output_path)
 		print(f"[INFO] Sending Generated Image: {output_path}")
 		base_url = request.host_url.rstrip('/')
 		return jsonify({'image_url': f'{base_url}/static/generated/{filename}'})

@@ -7,7 +7,9 @@ aliyun-python-sdk-core==2.16.0
 aliyun-python-sdk-kms==2.16.5
 async-timeout==5.0.1
 attrs==25.3.0
+aws-xray-sdk
 blinker==1.9.0
+boto3
 certifi==2025.1.31
 cffi==1.17.1
 charset-normalizer==3.4.1
@@ -55,6 +57,7 @@ pyarrow==19.0.1
 pycparser==2.22
 pycryptodome==3.22.0
 python-dateutil==2.9.0.post0
+python-dotenv
 pytorch-lightning==2.5.1
 pytz==2025.2
 PyYAML==6.0.2

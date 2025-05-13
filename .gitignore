@@ -15,6 +15,11 @@ static/sample/
 # OS files
 .DS_Store
 Thumbs.db
+.env
 
 # Datasets
 data/
+
+# Terraform
+terraform.tfvars
+terraform/terraform.exe
