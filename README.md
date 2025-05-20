@@ -102,12 +102,12 @@ This project was deployed to the cloud using a fully containerized setup:
 
 To support production-level transparency and reliability, monitoring and tracing were implemented:
 
-### 📊 Amazon CloudWatch
+### Amazon CloudWatch
 
 - **Container Logs:** Collected from the ECS task and streamed to a log group.
 - **Alarms:** CPU utilization alarm created to notify via email when thresholds are exceeded.
 
-### 📡 AWS X-Ray
+### AWS X-Ray
 
 - X-Ray SDK integrated in the Flask app to trace image generation endpoints.
 - Sidecar container (`xray-daemon`) added to the ECS task to relay trace data.
