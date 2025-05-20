@@ -10,7 +10,7 @@ import {
   ScrollView,
   Platform,
 } from 'react-native';
-import { Video } from 'expo-video';
+import { Video } from 'expo-av';
 
 export default function App() {
   const [prompt, setPrompt] = useState('');
